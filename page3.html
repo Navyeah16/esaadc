@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Navya R</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            text-decoration: none;
+            list-style: none;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            background-color: #F4F4EC;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        nav {
+            width: 100%;
+            height: 80px;
+            background: #04445F;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 50px;
+            position: fixed;
+            top: 0;
+            z-index: 1000;
+        }
+
+        label.logo {
+            color: #FFF;
+            font-family: "Times New Roman";
+            font-size: 30px;
+            font-weight: 400;
+        }
+
+        nav ul {
+            display: flex;
+        }
+
+        nav ul li {
+            margin: 0 20px;
+            line-height: 80px;
+        }
+
+        nav ul li a {
+            color: #FFF;
+            font-size: 18px;
+            padding: 7px 15px;
+            border-radius: 3px;
+            text-transform: uppercase;
+            transition: background-color 0.5s ease;
+        }
+
+        nav ul li a:hover, a.active {
+            background-color: #C8D5CB;
+            color: #04445F;
+        }
+
+        .checkbtn {
+            font-size: 30px;
+            color: white;
+            float: right;
+            line-height: 80px;
+            cursor: pointer;
+            display: none;
+        }
+
+        #check {
+            display: none;
+        }
+
+        section {
+            padding: 100px 0 20px; 
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .portfolio-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            width: 80%;
+            max-width: 1200px;
+            gap: 20px;
+        }
+
+        .portfolio-item {
+            position: relative;
+            width: 45%;
+            max-width: 500px;
+            text-align: center;
+        }
+
+        .image-container {
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            border-radius: 10px;
+        }
+
+        .image-container img {
+            width: 100%;
+            transition: transform 0.5s ease, filter 0.5s ease;
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: lighter;
+            border-radius: 10px;
+        }
+
+        .image-container:hover img {
+            transform: scale(1.1);
+            filter: brightness(0.7);
+        }
+
+        .image-container:hover .overlay {
+            opacity: 1;
+        }
+
+        .title {
+            font-size: 1.25rem;
+            margin-top: 10px;
+            color: #04445F;
+        }
+
+        footer {
+            background-color: #D7E4D0;
+            padding: 20px;
+            border-top: 3px solid #04445F;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+        .footer-container {
+            display: flex;
+            width: 100%;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1920px;
+            margin: 0 auto;
+        }
+
+        footer p {
+            color: #04445F;
+            font-size: 16px;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-icons a {
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+        }
+
+        .social-icons img {
+            width: 100%;
+            height: 100%;
+        }
+        
+        .displaywork {
+            padding: 0;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #063850;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            box-sizing: border-box;
+        }
+
+        .ncontainer {
+            display: flex;
+            justify-content: space-between; 
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .slider {
+            position: relative;
+            width: 60%;
+            margin-right: 40px;
+            border-radius: 20px;
+            padding: 20px;
+        }
+
+        .slider img {
+            width: 100%;
+            height: auto;
+            display: none;
+            border-radius: 40px;
+            transition: opacity 0.4s ease;
+        }
+
+        .slider img.active {
+            display: block;
+        }
+
+        .arrow {
+            position: absolute;
+            top: 50%;
+            width: 50px;
+            height: 50px;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            cursor: pointer;
+            z-index: 5;
+            font-size: 30px;
+            text-align: center;
+            line-height: 50px;
+            border-radius: 50%;
+            transition: background-color 0.3s;
+        }
+
+        .arrow-left {
+            left: 10px;
+            transform: translateY(-50%);
+        }
+
+        .arrow-right {
+            right: 10px;
+            transform: translateY(-50%);
+        }
+
+        .arrow:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+        
+        .video-container {
+            width: 35%;
+            text-align: left;
+            color: white;
+        }
+
+        .video-container h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .video-container h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .video-container video {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            transition: all 0.3s;
+        }
+
+        .video-container video:hover {
+            transform: scale(1.05);
+        }
+
+        .center-image {
+            width: 100%;
+            max-width: 400px;
+            height: auto;
+            margin: 0 auto;
+            display: block;
+        }
+
+        @media (max-width: 920px) {
+            nav ul {
+                position: fixed;
+                width: 100%;
+                height: 100vh;
+                top: 80px;
+                left: -100%;
+                background: #04445F;
+                flex-direction: column;
+                text-align: center;
+                transition: all 0.5s ease;
+            }
+
+            nav ul li {
+                display: block;
+                margin: 50px 0;
+                line-height: 30px;
+            }
+
+            nav ul li a {
+                font-size: 24px;
+            }
+
+            nav ul li a:hover, a.active {
+                background: none;
+                color: #C8D5CB;
+            }
+
+            .checkbtn {
+                display: block;
+            }
+
+            #check:checked ~ ul {
+                left: 0;
+            }
+
+            .ncontainer {
+                flex-direction: column; 
+                align-items: center; 
+            }
+
+            .slider {
+                width: 90%; 
+                max-width: 90%; 
+                margin: 20px 0; 
+            }
+
+            .video-container {
+                width: 90%; 
+                max-width: 90%; 
+                margin: 20px 0; 
+                text-align: center; 
+            }
+
+            .video-container h1, .video-container h2 {
+                text-align: center; 
+                font-size: 1.8rem; 
+            }
+
+            .video-container h2 {
+                font-size: 1.2rem; 
+            }
+            footer {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                padding: 10px;
+            }
+            .footer-container {
+                flex-direction: column;
+                align-items: center;
+                gap: 10px;
+            }
+            footer p {
+                font-size: 14px;
+                margin: 5px 0;
+            }
+            .social-icons {
+                gap: 10px;
+                justify-content: center;
+            }
+
+            .portfolio-item {
+                width: 100%;
+            }
+
+            .title {
+                font-size: 1rem;
+            }
+
+            .overlay {
+                font-size: 1.25rem;
+            
+            }
+            .center-image {
+                 max-width: 300px; 
+            }
+            
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <label class="logo">Navya R</label>
+        <input type="checkbox" id="check">
+        <label for="check" class="checkbtn">&#9776;</label>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="page2.html">About</a></li>
+            <li><a href="#work"  class="active">Work</a></li>
+            <li><a href="page4.html">Contact</a></li>
+        </ul>
+    </nav>
+
+   
+    <section>
+        <div class="portfolio-container" id="work">
+            <div class="portfolio-item">
+                <a href="#seeyou-section">
+                <div class="image-container">
+                    <img src="Frame 2.jpg" alt="SeeYou">
+                    <div class="overlay">
+                        <h3>#interfacedesign #teamwork</h3>
+                    </div>
+                </a>
+                </div>
+                <p class="title">SeeYou</p>
+            </div>
+            
+            <div class="portfolio-item">
+                <a href="#pookieboo-section">
+                <div class="image-container">
+                    <img src="Frame 8.jpg" alt="Pookieboo">
+                    <div class="overlay">
+                        <h3>#branding #conceptual #individual</h3>
+                    </div>
+                </a>
+                </div>
+                <p class="title">Pookieboo</p>
+            </div>
+
+            <div class="portfolio-item">
+                <a href="#analogy-section">
+                <div class="image-container">
+                    <img src="Frame 3.jpg" alt="Analogy">
+                    <div class="overlay">
+                        <h3>#servicedesign #problemsolving #teamwork</h3>
+                    </div>
+                </a>
+                </div>
+                <p class="title">Analogy</p>
+            </div>
+
+            <div class="portfolio-item">
+                <a href="#cortex-section">
+                <div class="image-container">
+                    <img src="Frame 1.jpg" alt="Cortex">
+                    <div class="overlay">
+                        <h3>#interfacedesign #userresearch #individual</h3>
+                    </div>
+                </a>
+                </div>
+                <p class="title">Cortex</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="seeyou-section" class="displaywork">
+        <div class="ncontainer">
+   
+            <div class="slider" id="slider">
+                
+                <img src="Frame 14.jpg" alt="Slide 1" class="active">
+                <img src="Frame 15.jpg" alt="Slide 2">
+                <img src="Frame 16.jpg" alt="Slide 3">
+                <img src="Frame 18.jpg" alt="Slide 4">
+
+                
+                <button class="arrow arrow-left" onclick="prevSlide()">&#8249;</button>
+                <button class="arrow arrow-right" onclick="nextSlide()">&#8250;</button>
+            </div>
+        
+           
+            <div class="video-container">
+                <h1>UI UX</h1>
+                <h2>App Design</h2>
+                <video id="video" class="video" controls muted>
+                    <source src="seeyou.mp4" type="video/mp4">
+                </video>
+            </div>
+        </div>
+    </section>
+
+
+    <section id="pookieboo-section" class="displaywork">
+        <div class="ncontainer">
+            <div class="slider" id="slider">
+                
+                <img src="Frame 28.jpg" alt="Slide 1" class="active">
+                <img src="Frame 29.jpg" alt="Slide 2">
+                <img src="Frame 30.jpg" alt="Slide 3">
+                <img src="Frame 31.jpg" alt="Slide 4">
+
+                
+                <button class="arrow arrow-left" onclick="prevSlide()">&#8249;</button>
+                <button class="arrow arrow-right" onclick="nextSlide()">&#8250;</button>
+            </div>
+        
+        
+           
+            <div class="video-container">
+                <h1>BRANDING</h1>
+                <h2>Soft Toy Brand</h2>
+                <img src="pokie.gif" class="center-image" alt="Analogy GIF">
+            </div>
+        </div>
+    </section>
+
+    <section id="analogy-section" class="displaywork">
+        <div class="ncontainer">
+            <div class="slider" id="slider">
+                
+                <img src="Frame 19.jpg" alt="Slide 1" class="active">
+                <img src="Frame 20.jpg" alt="Slide 2">
+                <img src="Frame 21.jpg" alt="Slide 3">
+
+                
+                <button class="arrow arrow-left" onclick="prevSlide()">&#8249;</button>
+                <button class="arrow arrow-right" onclick="nextSlide()">&#8250;</button>
+            </div>
+        
+        
+           
+            <div class="video-container">
+                <h1>SERVICE DESIGN</h1>
+                <h2>Make-up Station</h2>
+                <img src="analogy.gif" class="center-image" alt="Analogy GIF">
+
+            </div>
+        </div>
+    </section>
+
+    <section id="cortex-section" class="displaywork">
+        <div class="ncontainer">
+            <div class="slider" id="slider">
+                
+                <img src="Frame 27.jpg" alt="Slide 1" class="active">
+                <img src="Frame 25.jpg" alt="Slide 2">
+                <img src="Frame 26.jpg" alt="Slide 3">
+
+                
+                <button class="arrow arrow-left" onclick="prevSlide()">&#8249;</button>
+                <button class="arrow arrow-right" onclick="nextSlide()">&#8250;</button>
+            </div>
+        
+           
+            <div class="video-container">
+                <h1>UI DESIGN</h1>
+                <h2>Digital Gas Stove</h2>
+                <video id="video" class="video" controls muted>
+                    <source src="ct.mp4" type="video/mp4">
+                </video>
+            </div>
+        </div>
+    </section>
+
+
+    <footer>
+        <div class="footer-container">
+            <p>2024 Navya R</p>
+            <p>Crave, Create, Collaborate.</p>
+            <div class="social-icons">
+                <a href="https://www.behance.net/navyaraghunath1" target="_blank"><img src="bh.png" alt="Behance"></a>
+                <a href="https://www.linkedin.com/in/navya-raghunath-981847332" target="_blank"><img src="in.png" alt="LinkedIn"></a>
+                <a href="https://www.instagram.com/nav.yeh?igsh=ZXh2aTJxejNpYm1v" target="_blank"><img src="ig.png" alt="Instagram"></a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+ 
+        document.querySelectorAll('.slider').forEach(slider => {
+    const slides = slider.querySelectorAll('img');
+    let currentSlide = 0;
+
+    function showSlide(index) {
+        slides.forEach((slide, i) => {
+            slide.classList.remove('active');
+            if (i === index) {
+                slide.classList.add('active');
+            }
+        });
+    }
+
+    function nextSlide() {
+        currentSlide = (currentSlide + 1) % slides.length;
+        showSlide(currentSlide);
+    }
+
+    function prevSlide() {
+        currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+        showSlide(currentSlide);
+    }
+
+    slider.querySelector('.arrow-left').addEventListener('click', prevSlide);
+    slider.querySelector('.arrow-right').addEventListener('click', nextSlide);
+    
+    showSlide(currentSlide);
+});
+        
+    </script>
+</body>
+</html>
